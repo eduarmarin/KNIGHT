@@ -6,7 +6,7 @@ for (let i = 0; i < 8; i++) {
 }
 
 const boardmoves = [];// create anther board!
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
   boardmoves[i] = [];
   for (let j = 0; j < 2; j++) {
     boardmoves[i][j] = [];
@@ -33,54 +33,10 @@ const addAllMoves = (x, y, level) => { // knight movements
   addMove(x, y, x - 2, y + 1, level);
   addMove(x, y, x - 1, y + 2, level);
 }
-
-/* const addAllMoves = (x, y, level) => { // knight movements 
-  addMove(x + 1, y + 2, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x + 1, y + 2];
-    z++;
-  addMove(x + 2, y + 1, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x + 2, y + 1];
-    z++;
-  addMove(x + 2, y - 1, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x + 2, y - 1];
-    z++;
-  addMove(x + 1, y - 2, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x + 1, y - 2];  
-    z++;
-  addMove(x - 1, y - 2, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x - 1, y - 2];
-    z++;
-  addMove(x - 2, y - 1, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x - 2, y - 1];
-    z++;
-  addMove(x - 2, y + 1, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x - 2, y + 1];
-    z++;
-  addMove(x - 1, y + 2, level);
-    boardmoves[z][0] = [x, y];
-    boardmoves[z][1] = [x - 1, y + 2];
-    z++;
-} */
-/* 
-const paths1 = (i,j) => {
-  //for ( let m = 0; m < 8; m++){
-    boardmoves[z][0] = [i, j];
-    boardmoves[z][1] = [i, j];
-  //}
-} */
 const addAllPossible = (level) => { // scan the board 
   for (let i = 0; i < 8; i++) {
     for (let j = 0; j < 8; j++) {
       if (board[i][j] === level) {
-        //paths1(i,j);
-        //boardmoves[0][z++] = [i, j];
         addAllMoves(i, j, level + 1); // call moves function 
       }
     }
@@ -96,7 +52,7 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 
-console.log("moves: " + findPath(3, 3, 3, 5));
+console.log("moves: " + findPath(3, 3, 1, 4));
 console.log(boardmoves.length);
 console.log(boardmoves);
 console.log(board);
