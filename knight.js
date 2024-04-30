@@ -6,7 +6,7 @@ for (let i = 0; i < 8; i++) {
 }
 
 const boardmoves = [];// create another board!
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 40; i++) {
   boardmoves[i] = [];
   for (let j = 0; j < 2; j++) {
     boardmoves[i][j] = [];
@@ -52,7 +52,14 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 
-console.log("moves: " + findPath(3, 3, 1, 4));
+const findMoves = () => {
+  for (i = 0; i < z; i++){
+    if (boardmoves[z][1] == [endX, endY]){
+
+    }
+  }
+}
+console.log("moves: " + findPath(3, 3, 4, 6)); // 1 move 3, 3, 1, 4 ----------- 2 move 3, 3, 4, 6
 console.log(boardmoves.length);
 console.log(boardmoves);
-console.log(board);
+//console.log(board);
