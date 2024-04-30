@@ -6,61 +6,72 @@ for (let i = 0; i < 8; i++) {
 }
 
 const boardmoves = [];// create anther board!
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 100; i++) {
   boardmoves[i] = [];
   for (let j = 0; j < 2; j++) {
     boardmoves[i][j] = [];
   }
 }
-let z = 0;
+var z = 0;
 
-const addMove = (x, y, level) => {  //insert the initial position!
+const addMove = (a, b, x, y, level) => {  //insert the initial position!
   if ((x >= 0) && (x <= 7) && (y >= 0) && (y <= 7) && board[x][y] == null) {
     board[x][y] = level;
+    boardmoves[z][0] = [a, b];
+    boardmoves[z][1] = [x, y];
+    z++;
   }
 }
 
-/* const addAllMoves = (x, y, level) => { // knight movements
-  addMove(x + 1, y + 2, level);
-  addMove(x + 2, y + 1, level);
-  addMove(x + 2, y - 1, level);
-  addMove(x + 1, y - 2, level);
-  addMove(x - 1, y - 2, level);
-  addMove(x - 2, y - 1, level);
-  addMove(x - 2, y + 1, level);
-  addMove(x - 1, y + 2, level);
+const addAllMoves = (x, y, level) => { // knight movements
+  addMove(x, y, x + 1, y + 2, level);
+  addMove(x, y, x + 2, y + 1, level);
+  addMove(x, y, x + 2, y - 1, level);
+  addMove(x, y, x + 1, y - 2, level);
+  addMove(x, y, x - 1, y - 2, level);
+  addMove(x, y, x - 2, y - 1, level);
+  addMove(x, y, x - 2, y + 1, level);
+  addMove(x, y, x - 1, y + 2, level);
 }
- */
-const addAllMoves = (x, y, level) => { // knight movements 
+
+/* const addAllMoves = (x, y, level) => { // knight movements 
   addMove(x + 1, y + 2, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x + 1, y + 2];
+    z++;
   addMove(x + 2, y + 1, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x + 2, y + 1];
+    z++;
   addMove(x + 2, y - 1, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x + 2, y - 1];
+    z++;
   addMove(x + 1, y - 2, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x + 1, y - 2];  
+    z++;
   addMove(x - 1, y - 2, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x - 1, y - 2];
+    z++;
   addMove(x - 2, y - 1, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x - 2, y - 1];
+    z++;
   addMove(x - 2, y + 1, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x - 2, y + 1];
+    z++;
   addMove(x - 1, y + 2, level);
-    boardmoves[z++][0] = [x, y];
+    boardmoves[z][0] = [x, y];
     boardmoves[z][1] = [x - 1, y + 2];
-}
+    z++;
+} */
 /* 
 const paths1 = (i,j) => {
   //for ( let m = 0; m < 8; m++){
-    boardmoves[z++][0] = [i, j];
+    boardmoves[z][0] = [i, j];
     boardmoves[z][1] = [i, j];
   //}
 } */
@@ -77,7 +88,7 @@ const addAllPossible = (level) => { // scan the board
 }
 
 const findPath = (startX, startY, endX, endY) => {
-  addMove(startX, startY, 0); // call the function to insert initial position
+  addMove(startX, startY, startX, startY, 0); // call the function to insert initial position
   let index = 0;
   do {
     addAllPossible(index++); // start with 0
@@ -85,7 +96,7 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 
-console.log(findPath(3, 3, 1, 4));
+console.log("moves: " + findPath(3, 3, 3, 5));
 console.log(boardmoves.length);
 console.log(boardmoves);
 console.log(board);
