@@ -5,7 +5,7 @@ for (let i = 0; i < 8; i++) {
   board[i] = [];
 }
 
-const boardmoves = [];// create anther board!
+const boardmoves = [];// create another board!
 for (let i = 0; i < 10; i++) {
   boardmoves[i] = [];
   for (let j = 0; j < 2; j++) {
@@ -17,7 +17,7 @@ var z = 0;
 const addMove = (a, b, x, y, level) => {  //insert the initial position!
   if ((x >= 0) && (x <= 7) && (y >= 0) && (y <= 7) && board[x][y] == null) {
     board[x][y] = level;
-    boardmoves[z][0] = [a, b];
+    boardmoves[z][0] = [a, b]; // fill the another board matriz with inicial and final square
     boardmoves[z][1] = [x, y];
     z++;
   }
