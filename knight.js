@@ -6,18 +6,19 @@ for (let i = 0; i < 8; i++) {
 }
 
 const boardMoves = [];// create another board with every internal move!
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 40; i++) { // iteration to initialize boradMoves matriz <-----------------
   boardMoves[i] = [];
   for (let j = 0; j < 2; j++) {
     boardMoves[i][j] = [];
   }
 }
+
 var z = 0;
 
 const addMove = (a, b, x, y, level) => {  //insert level; level says how many step take it 
   if ((x >= 0) && (x <= 7) && (y >= 0) && (y <= 7) && board[x][y] == null) {
     board[x][y] = level;
-    boardMoves[z][0] = [a, b]; // fill the boardMoves with inicial and final square 
+    boardMoves[z][0] = [a, b]; // fill the boardMoves with inicial and final square move
     boardMoves[z][1] = [x, y]; // every iteration 
     z++;
   }
@@ -55,15 +56,18 @@ const findPath = (startX, startY, endX, endY) => {
 const allmoves = []; // it will receive 
 const findMoves = (endX, endY) => {
   for (i = z; i >=0 ; i--){
-    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare the very last one
-       //const lastmove = boardMoves.slice(i, i + 1); //then add it to another array
+    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare the last move
+       const lastmove = boardMoves.slice(i, i + 1); //then add it to another array
        allmoves.push(boardMoves.slice(i, i + 1));
-
-       //console.log("last square: " + boardMoves[i][1]);
-       console.log("last move: " + allmoves[0]);
-       //if (lastmove[i][0][0] == startX && lastmove[i][0][1] == startY){}
-       //console.log("allmoves sequence: "+ allmoves[0]);
     }
+    if (boardMoves[i][1][0] == lastmove[i][0][0] && boardMoves[i][1][1] == lastmove[i][0][1]){
+      allmoves.push(boardMoves.slice(i, i + 1));
+      lastmove = boardMoves.slice(i, i + 1);
+    }
+    //console.log("last square: " + boardMoves[i][1]);
+    //console.log("i lastmove: " + i + " last move: " + lastmove);
+    //if (boardMoves[i][1][0] == lastmove[i][0][0] && boardMoves[i][1][1] == lastmove[i][0][1]){}
+    //console.log("allmoves sequence: "+ allmoves[0]);
   }
 }
 
