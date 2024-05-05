@@ -52,14 +52,17 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 
-const allmoves = [];
+const allmoves = []; // it will receive 
 const findMoves = (endX, endY) => {
-  for (i = 0; i < z; i++){
-    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){
-       console.log("last move: " + boardMoves[i][1]);
-       const lastcell = boardMoves.slice(i, i + 1);
-       allmoves.push(lastcell);
-       console.log(allmoves[0]);
+  for (i = z; i >=0 ; i--){
+    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare the very last one
+       //const lastmove = boardMoves.slice(i, i + 1); //then add it to another array
+       allmoves.push(boardMoves.slice(i, i + 1));
+
+       //console.log("last square: " + boardMoves[i][1]);
+       console.log("last move: " + allmoves[0]);
+       //if (lastmove[i][0][0] == startX && lastmove[i][0][1] == startY){}
+       //console.log("allmoves sequence: "+ allmoves[0]);
     }
   }
 }
