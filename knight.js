@@ -5,25 +5,25 @@ for (let i = 0; i < 8; i++) {
   board[i] = [];
 }
 
-const boardmoves = [];// create another board!
+const boardMoves = [];// create another board with every internal move!
 for (let i = 0; i < 40; i++) {
-  boardmoves[i] = [];
+  boardMoves[i] = [];
   for (let j = 0; j < 2; j++) {
-    boardmoves[i][j] = [];
+    boardMoves[i][j] = [];
   }
 }
 var z = 0;
 
-const addMove = (a, b, x, y, level) => {  //insert the initial position!
+const addMove = (a, b, x, y, level) => {  //insert level; level says how many step take it 
   if ((x >= 0) && (x <= 7) && (y >= 0) && (y <= 7) && board[x][y] == null) {
     board[x][y] = level;
-    boardmoves[z][0] = [a, b]; // fill the another board matriz with inicial and final square
-    boardmoves[z][1] = [x, y];
+    boardMoves[z][0] = [a, b]; // fill the boardMoves with inicial and final square 
+    boardMoves[z][1] = [x, y]; // every iteration 
     z++;
   }
 }
 
-const addAllMoves = (x, y, level) => { // knight movements
+const addAllMoves = (x, y, level) => { // goes to every possible knight move
   addMove(x, y, x + 1, y + 2, level);
   addMove(x, y, x + 2, y + 1, level);
   addMove(x, y, x + 2, y - 1, level);
@@ -52,14 +52,16 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 
-const findMoves = () => {
+const findMoves = (endX, endY) => {
   for (i = 0; i < z; i++){
-    if (boardmoves[z][1] == [endX, endY]){
-
+    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){
+       console.log("this is boardMoves: " + boardMoves[i][1]);
     }
   }
 }
+
 console.log("moves: " + findPath(3, 3, 4, 6)); // 1 move 3, 3, 1, 4 ----------- 2 move 3, 3, 4, 6
-console.log(boardmoves.length);
-console.log(boardmoves);
-//console.log(board);
+//console.log(boardMoves.length);
+//console.log(boardMoves);
+//console.log("this is z: " + z);
+findMoves(4, 6);
