@@ -55,7 +55,7 @@ const findPath = (startX, startY, endX, endY) => {
 const findMoves = (endX, endY) => {
   for (i = 0; i < z; i++){
     if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){
-       console.log("this is boardMoves: " + boardMoves[i][1]);
+       console.log("last move: " + boardMoves[i][1]);
     }
   }
 }
