@@ -1,12 +1,13 @@
 // knight exercise
+// initial code taken from https://unicorn-utterances.com/posts/chess-knight-problem
 
-const board = [];// create the board!
+const board = [];// create the board
 for (let i = 0; i < 8; i++) {
   board[i] = [];
 }
 
 const boardMoves = [];// create another board with every internal move!
-for (let i = 0; i < 100; i++) { // iteration to initialize boradMoves matriz <-----------------
+for (let i = 0; i < 100; i++) { // iteration to initialize boradMoves matriz
   boardMoves[i] = [];
   for (let j = 0; j < 2; j++) {
     boardMoves[i][j] = [];
@@ -52,6 +53,7 @@ const findPath = (startX, startY, endX, endY) => {
   } while (board[endX][endY] == null);
   return board[endX][endY];
 }
+
 //-------------------------------------------------------------------------------------------------------------
   const findMoves = (endX, endY) => { // this function will display every move formt the firt one to last one
   var lastmove = [];           // this one help to compare every array iniside boardMoves
@@ -74,16 +76,15 @@ const findPath = (startX, startY, endX, endY) => {
     }
   }
   var j = 1;
-  for (i = allmoves.length - 2; i >0 ; i--){ // display step by step from the first one to last one
+  for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
     console.log("move: " + j++);
     console.log(allmoves[i]);
   }
 }
-var startX = 0;
+var startX = 0;   // start point
 var startY = 0;
-var endX = 7;
+var endX = 7;     // final point
 var endY = 7;
-console.log("moves: " + findPath(startX, startY, endX, endY)); // 1 move 3, 3, 1, 4 
-findMoves(endX, endY);                               // 2 move 3, 3, 4, 6           
-                                               // 3 move 3, 3, 6, 7           
-                                               // 4 move 3, 3,                                                         
+
+console.log("moves: " + findPath(startX, startY, endX, endY));
+findMoves(endX, endY);                                                                                     
