@@ -53,20 +53,20 @@ const findPath = (startX, startY, endX, endY) => {
   return board[endX][endY];
 }
 //-------------------------------------------------------------------------------------------------------------
-const lastmove = [];           // this one help to compare every array iniside boardMoves
+var lastmove = [];           // this one help to compare every array iniside boardMoves
 for (let i = 0; i < 40; i++) { 
   lastmove[i] = [];
   for (let j = 0; j < 2; j++) {
     lastmove[i][j] = [];
   }
 }
-const allmoves = [];           // this is a matriz to save moves connect to the last one, it'll save pairs 
-for (let i = 0; i < 40; i++) { 
-  allmoves[i] = [];
-  for (let j = 0; j < 2; j++) {
-    allmoves[i][j] = [];
-  }
-}
+var allmoves = [];           // this is a matriz to save moves connect to the last one, it'll save pairs 
+// for (let i = 0; i < 40; i++) { 
+//   allmoves[i] = [];
+//   for (let j = 0; j < 2; j++) {
+//     allmoves[i][j] = [];
+//   }
+// }
 
 const findMoves = (endX, endY) => {
   for (i = z; i >=0 ; i--){
@@ -74,21 +74,17 @@ const findMoves = (endX, endY) => {
       lastmove = boardMoves.slice(i, i + 1); //then add it to another array
       allmoves.push(boardMoves.slice(i, i + 1));
     }
-    // if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){
-    //   lastmove = boardMoves.slice(i, i + 1);
-    //   allmoves.push(boardMoves.slice(i, i + 1));
-    // }
-    //console.log("last square: " + boardMoves[i][1]);
-    //console.log("i lastmove: " + i + " last move: " + lastmove);
-    // console.log("allmoves: ");
-    // console.log(allmoves);
-    console.log("lastmove: ");
-    console.log(lastmove[0]);
+    if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){
+      lastmove = boardMoves.slice(i, i + 1);
+      allmoves.push(boardMoves.slice(i, i + 1));
+    }
+  }
+  for (i = allmoves.length - 2; i >0 ; i--){ // display step by step from the first one to last one
+    console.log("allmoves: " + allmoves.length);
+    console.log(allmoves[i]);
   }
 }
 
-console.log("moves: " + findPath(3, 3, 4, 6)); // 1 move 3, 3, 1, 4 ----------- 2 move 3, 3, 4, 6
-//console.log(boardMoves.length);
-//console.log(boardMoves);
-//console.log("this is z: " + z);
-findMoves(4, 6);
+console.log("moves: " + findPath(3, 3, 4, 6)); // 1 move 3, 3, 1, 4 
+findMoves(4, 6);                               // 2 move 3, 3, 4, 6           
+                                               // 2 move 3, 3,            
