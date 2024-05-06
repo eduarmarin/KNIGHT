@@ -52,22 +52,38 @@ const findPath = (startX, startY, endX, endY) => {
   } while (board[endX][endY] == null);
   return board[endX][endY];
 }
+//-------------------------------------------------------------------------------------------------------------
+const lastmove = [];           // this one help to compare every array iniside boardMoves
+for (let i = 0; i < 40; i++) { 
+  lastmove[i] = [];
+  for (let j = 0; j < 2; j++) {
+    lastmove[i][j] = [];
+  }
+}
+const allmoves = [];           // this is a matriz to save moves connect to the last one, it'll save pairs 
+for (let i = 0; i < 40; i++) { 
+  allmoves[i] = [];
+  for (let j = 0; j < 2; j++) {
+    allmoves[i][j] = [];
+  }
+}
 
-const allmoves = []; // it will receive 
 const findMoves = (endX, endY) => {
   for (i = z; i >=0 ; i--){
     if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare the last move
-       const lastmove = boardMoves.slice(i, i + 1); //then add it to another array
-       allmoves.push(boardMoves.slice(i, i + 1));
-    }
-    if (boardMoves[i][1][0] == lastmove[i][0][0] && boardMoves[i][1][1] == lastmove[i][0][1]){
+      lastmove = boardMoves.slice(i, i + 1); //then add it to another array
       allmoves.push(boardMoves.slice(i, i + 1));
-      lastmove = boardMoves.slice(i, i + 1);
     }
+    // if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){
+    //   lastmove = boardMoves.slice(i, i + 1);
+    //   allmoves.push(boardMoves.slice(i, i + 1));
+    // }
     //console.log("last square: " + boardMoves[i][1]);
     //console.log("i lastmove: " + i + " last move: " + lastmove);
-    //if (boardMoves[i][1][0] == lastmove[i][0][0] && boardMoves[i][1][1] == lastmove[i][0][1]){}
-    //console.log("allmoves sequence: "+ allmoves[0]);
+    // console.log("allmoves: ");
+    // console.log(allmoves);
+    console.log("lastmove: ");
+    console.log(lastmove[0]);
   }
 }
 
