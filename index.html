@@ -6,9 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KNIGHT</title>
   <link rel="stylesheet" href="style.css">
-      <!-- bootstraps links -->
-      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
-      <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> -->
 </head>
 
 <body>
@@ -16,54 +13,6 @@
       KNIGHT
   </span>
   <br><br>
-  <script type="text/javascript">
-      // Create a center tag to center all the elements
-      var center = document.createElement('center');
-      
-      // Create a table element
-      var ChessTable = document.createElement('table');
-      for (var i = 0; i < 8; i++) {
-      
-          // Create a row
-          var tr = document.createElement('tr');
-          for (var j = 0; j < 8; j++) {
-      
-              // Create a cell
-              var td = document.createElement('td');
-      
-              // If the sum of cell coordinates is even
-              // then color the cell white
-              if ((i + j) % 2 == 0) {
-      
-                  // Create a class attribute for all white cells
-                  td.setAttribute("class", "cell whitecell");
-                  tr.appendChild(td);
-              }
-      
-              // If the sum of cell coordinates is odd then
-              // color the cell black
-              else {
-      
-                  // Create a class attribute for all black cells
-                  td.setAttribute('class', 'cell blackcell');
-      
-                  // Append the cell to its row
-                  tr.appendChild(td);
-              }
-              //var x = document.getElementsByTagName("tr");
-              //console.log("cordenadas: " + x[i].rowIndex)
-          }
-      
-          // Append the row
-          ChessTable.appendChild(tr);
-      }
-      center.appendChild(ChessTable);
-      
-      // Modifying table attribute properties
-      ChessTable.setAttribute('cellspacing', '0');
-      ChessTable.setAttribute('width', '270px');
-      document.body.appendChild(center);
-      console.log("prueba")
-  </script>
+  <script src="main.js"  defer="defer"></script>
 </body>
 </html>
