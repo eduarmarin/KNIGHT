@@ -3,10 +3,11 @@ body {
 }
 
 .cell {
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border: 1.5px solid grey;
     border-style: inset;
+    cursor: pointer;
 }
 
 .blackcell {
@@ -15,4 +16,8 @@ body {
 
 .whitecell {
     background-color: white;
+}
+
+.blue {
+    background-color: blue;
 }

@@ -55,32 +55,37 @@ const findPath = (startX, startY, endX, endY) => {
 }
 
 //-------------------------------------------------------------------------------------------------------------
-  const findMoves = (endX, endY) => { // this function will display every move formt the firt one to last one
-  var lastmove = [];           // this one help to compare every array iniside boardMoves
-  for (let i = 0; i < 40; i++) { 
-    lastmove[i] = [];
-    for (let j = 0; j < 2; j++) {
-      lastmove[i][j] = [];
+  const findMoves = (endX, endY) => { // this function will save and display every move from the first one to the last one
+  
+    var lastmove = [];           // initialize a new matriz to help to compare every array inside boardMoves
+    for (let i = 0; i < 40; i++) { 
+      lastmove[i] = [];
+      for (let j = 0; j < 2; j++) {
+        lastmove[i][j] = [];
+      }
     }
-  }
-  var allmoves = [];           // this is a matriz to save moves connect to the last one, it'll save pairs 
+    
+    var allmoves = [];           // this is a matriz to save moves connect to the last one, it'll save pairs 
 
-  for (i = z; i >=0 ; i--){
-    if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
-      lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
-      allmoves.push(boardMoves.slice(i, i + 1));
+    for (i = z; i >=0 ; i--){
+      if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
+        lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
+        allmoves.push(boardMoves.slice(i, i + 1));
+      }
+      if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){ //reassign to compare again and push last array pair
+        lastmove = boardMoves.slice(i, i + 1);
+        allmoves.push(boardMoves.slice(i, i + 1));
+      }
     }
-    if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){ //reassign to compare again and push last array pair
-      lastmove = boardMoves.slice(i, i + 1);
-      allmoves.push(boardMoves.slice(i, i + 1));
+
+    var j = 1;
+    for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
+      console.log("move: " + j++);
+      console.log(allmoves[i]);
     }
   }
-  var j = 1;
-  for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
-    console.log("move: " + j++);
-    console.log(allmoves[i]);
-  }
-}
+
+//--------------------------------------------------- test --------------------------------------------
 var startX = 0;   // start point
 var startY = 0;
 var endX = 7;     // final point
