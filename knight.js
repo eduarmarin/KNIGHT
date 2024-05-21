@@ -77,7 +77,7 @@ const findPath = (startX, startY, endX, endY) => {
     var j = 1;
     for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
       console.log("move: " + j++);
-      console.log(allmoves[i]);
+      console.log(allmoves[i][0][0][0] + ",  " + allmoves[i][0][0][1]);
     }
     return allmoves;
   }

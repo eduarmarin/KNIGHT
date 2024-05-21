@@ -57,8 +57,8 @@ ChessTable.setAttribute('width', 'auto');
 document.body.appendChild(center);
 getindex();
 
-//-------findpath and findMoves-----------------------------------------------------------------------------------------------
-//-------findpath and findMoves-----------------------------------------------------------------------------------------------
+//-------findpath and findMoves functions-------------------------------------------------------------------------
+//-------findpath and findMoves functions-------------------------------------------------------------------------
 
 const board = [];// create the board
 for (let i = 0; i < 8; i++) {
@@ -135,19 +135,13 @@ const findPath = (startX, startY, endX, endY) => {
     }
     const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
     var j = 1;
+    var text = [] // array to save every string
     for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
+      var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with textcontent of every cell
+      text.push(text1);
       console.log("move: " + j++);
-      console.log(allmoves[i][0][0] + ",  " + allmoves[i][0][1]);
+      console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
+      console.log("to string: " + text + " lenght: " + text.length);
     }
     return allmovesr;
   }
-//--------------------------------------------------- test --------------------------------------------
-// var startX = cellstore[0];   // start point
-// var startY = cellstore[1];
-// var endX = cellstore[2];     // final point
-// var endY = cellstore[3];
-
-//console.log("moves: " + findPath(startX, startY, endX, endY));
-//console.log("allmoves: "+ findMoves(endX, endY));                                                                                     
-
-
