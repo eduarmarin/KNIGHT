@@ -37,15 +37,17 @@ function getindex (){
             this.style.transform = "scale(1.08, 1.08)";
             var indexcell=this.innerHTML; //this is string of 3 index
             if(x == 0){
-                cellstore[0] = indexcell[0]; 
-                cellstore[1] = indexcell[2];
+                cellstore[0] = indexcell[0]; //startX
+                cellstore[1] = indexcell[2]; //startX
                 x++;
             }else{
-                cellstore[2] = indexcell[0]; 
-                cellstore[3] = indexcell[2];
+                cellstore[2] = indexcell[0]; //endX
+                cellstore[3] = indexcell[2]; //endY
                 x = 0;
+                console.log("moves: " + findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]));
+                findMoves(cellstore[2], cellstore[3]);
             }
-            console.log("cellstore " + cellstore);
+            //console.log("cellstore " + cellstore);
         });
     }
 }
@@ -131,21 +133,21 @@ const findPath = (startX, startY, endX, endY) => {
         allmoves.push(boardMoves.slice(i, i + 1));
       }
     }
-    //const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
+    const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
     var j = 1;
     for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
       console.log("move: " + j++);
-      console.log(allmoves[i]);
+      console.log(allmoves[i][0][0] + ",  " + allmoves[i][0][1]);
     }
-    return allmoves;
+    return allmovesr;
   }
 //--------------------------------------------------- test --------------------------------------------
-var startX = 0;   // start point
-var startY = 0;
-var endX = 3;     // final point
-var endY = 3;
+// var startX = cellstore[0];   // start point
+// var startY = cellstore[1];
+// var endX = cellstore[2];     // final point
+// var endY = cellstore[3];
 
-console.log("moves: " + findPath(startX, startY, endX, endY));
-findMoves(endX, endY);                                                                                     
+//console.log("moves: " + findPath(startX, startY, endX, endY));
+//console.log("allmoves: "+ findMoves(endX, endY));                                                                                     
 
 
