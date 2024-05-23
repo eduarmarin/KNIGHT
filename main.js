@@ -13,7 +13,7 @@ for (var i = 0; i < 8; i++) {
     let tr = document.createElement('tr'); // Create a row
     for (var j = 0; j < 8; j++) {
         let td = document.createElement('td');// Create a cell
-        td.textContent = [i, j]; //and fill every cell with tr and td
+        td.textContent = [i, j]; //and fill every cell with tr and td   < ------------------------------------
         if ((i + j) % 2 == 0) { // If the sum of cell coordinates is even then color the cell white
             td.classList.add('cell', 'whitecell');
             tr.appendChild(td);
@@ -136,9 +136,9 @@ const findPath = (startX, startY, endX, endY) => {
     const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
     var j = 1;
     var text = [] // array to save every string
-    for (i = allmoves.length - 2; i >0 ; i--){ // display move by move
-      var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with textcontent of every cell
-      text.push(text1);
+    for (i = allmoves.length - 2; i >0 ; i--){  // loop to display move by move
+      var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
+      text.push(text1);                         // textcontent of every cell
       console.log("move: " + j++);
       console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
       console.log("to string: " + text + " lenght: " + text.length);
