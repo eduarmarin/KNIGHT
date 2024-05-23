@@ -50,13 +50,14 @@ function getindex (){
             //console.log("cellstore " + cellstore);
         });
     }
+		return celllist;
 }
 center.appendChild(ChessTable); // Modifying table attribute properties------------------------------------------
 ChessTable.setAttribute('cellspacing', '0');
 ChessTable.setAttribute('width', 'auto');
 document.body.appendChild(center);
 getindex();
-
+var xxx = getindex;
 //-------findpath and findMoves functions-------------------------------------------------------------------------
 //-------findpath and findMoves functions-------------------------------------------------------------------------
 
@@ -135,13 +136,24 @@ const findPath = (startX, startY, endX, endY) => {
     }
     //const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
     var j = 1;
-    var text = [] // array to save every move to string
-    for (i = allmoves.length - 2; i >0 ; i--){  // loop to display move by move
+    var totext = [] // array to save every move to string
+    for (i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
       var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
-      text.push(text1);                         // textcontent of every cell
+      totext.push(text1);                         // textcontent of every cell
       console.log("move: " + j++);
       console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
-      console.log("to string: " + text + " lenght: " + text.length);
+      console.log("to string: " + totext + " lenght: " + totext.length);
     }
-    return allmovesr;
+    return totext;
   }
+
+function everymove () { // highlight every move
+	var celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
+	for (let i = 0; i <= celllist.length; i++){
+		for (let j = 0; j <= totext.length; i++){
+			if (celllist[i] == totext[j]){
+				console.log("highligxht every move")
+		  }
+		}	
+	}
+}
