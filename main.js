@@ -30,7 +30,7 @@ for (var i = 0; i < 8; i++) {
 var cellstore = [];
 var x = 0;
 function getindex (){
-    var celllist = document.getElementsByClassName('cell');
+    var celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
     for (var i = 0 ; i < celllist.length; i++) {
         celllist[i].addEventListener('click', function () { // listen click on chessboard
             this.classList.add('blue');
@@ -133,9 +133,9 @@ const findPath = (startX, startY, endX, endY) => {
         allmoves.push(boardMoves.slice(i, i + 1));
       }
     }
-    const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
+    //const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
     var j = 1;
-    var text = [] // array to save every string
+    var text = [] // array to save every move to string
     for (i = allmoves.length - 2; i >0 ; i--){  // loop to display move by move
       var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
       text.push(text1);                         // textcontent of every cell
