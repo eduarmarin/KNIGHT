@@ -50,7 +50,7 @@ function getindex (){
             //console.log("cellstore " + cellstore);
         });
     }
-		return celllist;
+		//return celllist;
 }
 center.appendChild(ChessTable); // Modifying table attribute properties------------------------------------------
 ChessTable.setAttribute('cellspacing', '0');
@@ -115,42 +115,45 @@ const findPath = (startX, startY, endX, endY) => {
 }
 
 //-------------------------------------------------------------------------------------------------------------
-  const findMoves = (endX, endY) => { // this function will save and display every move from the first one to the last one
-    var lastmove = [];           // initialize a new matriz to help to compare every array inside boardMoves
-    for (let i = 0; i < 40; i++) { 
-      lastmove[i] = [];
-      for (let j = 0; j < 2; j++) {
-        lastmove[i][j] = [];
-      }
-    }
-    var allmoves = [];           // matriz to save moves connect to the last one, it'll save pairs 
-    for (i = z; i >=0 ; i--){
-      if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
-        lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
-        allmoves.push(boardMoves.slice(i, i + 1));
-      }
-      if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){ //reassign to compare again and push last array pair
-        lastmove = boardMoves.slice(i, i + 1);
-        allmoves.push(boardMoves.slice(i, i + 1));
-      }
-    }
-    //const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
-    var j = 1;
-    var totext = [] // array to save every move to string
-    for (i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
-      var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
-      totext.push(text1);                         // textcontent of every cell
-      console.log("move: " + j++);
-      console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
-      console.log("to string: " + totext + " lenght: " + totext.length);
-    }
-    return totext;
-  }
+var totext = [] // array to save every move to string
+const findMoves = (endX, endY) => { // this function will save and display every move from the first one to the last one
+	var lastmove = [];           // initialize a new matriz to help to compare every array inside boardMoves
+	for (let i = 0; i < 40; i++) { 
+		lastmove[i] = [];
+		for (let j = 0; j < 2; j++) {
+			lastmove[i][j] = [];
+		}
+	}
+	var allmoves = [];           // matriz to save moves connect to the last one, it'll save pairs 
+	for (i = z; i >=0 ; i--){
+		if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
+			lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
+			allmoves.push(boardMoves.slice(i, i + 1));
+		}
+		if (boardMoves[i][1][0] == lastmove[0][0][0] && boardMoves[i][1][1] == lastmove[0][0][1]){ //reassign to compare again and push last array pair
+			lastmove = boardMoves.slice(i, i + 1);
+			allmoves.push(boardMoves.slice(i, i + 1));
+		}
+	}
+	//const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
+	var j = 1;
+	for (i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
+		var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
+		totext.push(text1);                         // textcontent of every cell
+		console.log("move: " + j++);
+		console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
+		console.log("totext: " + totext + " lenght: " + totext.length);
+		everymove();
+	}
+	return totext;
+}
 
 function everymove () { // highlight every move
 	var celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
+	// console.log("celllist: " + celllist + " length: " + celllist.length)
+	// console.log("totext: " + totext + " length: " + totext.length)
 	for (let i = 0; i <= celllist.length; i++){
-		for (let j = 0; j <= totext.length; i++){
+		for (let j = 0; j <= totext.length; j++){
 			if (celllist[i] == totext[j]){
 				console.log("highligxht every move")
 		  }
