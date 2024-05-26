@@ -60,7 +60,6 @@ getindex();
 var xxx = getindex;
 //-------findpath and findMoves functions-------------------------------------------------------------------------
 //-------findpath and findMoves functions-------------------------------------------------------------------------
-
 const board = [];// create the board
 for (let i = 0; i < 8; i++) {
   board[i] = [];
@@ -139,24 +138,30 @@ const findMoves = (endX, endY) => { // this function will save and display every
 	var j = 1;
 	for (i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
 		var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
-		totext.push(text1);                         // textcontent of every cell
+		//totext.push(text1);                         // textcontent of every cell
 		console.log("move: " + j++);
 		console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
-		console.log("totext: " + totext + " lenght: " + totext.length);
-		everymove();
-	}
-	return totext;
+		console.log(" totext: " + totext + " totextlenght: " + totext.length);
+
+    var celllist1 = document.getElementsByTagName('td');    // <------------------------------------------------
+    console.log("celllist1: " + (celllist1[6].innerHTML));
+    for (let k = 0; k < celllist1.length; k++){
+      if (celllist1[k].innerHTML == text1){
+        console.log("highligxht every move ");
+        celllist1[k].classList.add('red');
+      }else{console.log("nohighlight");}
+    }
+  }  
+	//everymove();
 }
 
-function everymove () { // highlight every move
-	var celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
-	// console.log("celllist: " + celllist + " length: " + celllist.length)
-	// console.log("totext: " + totext + " length: " + totext.length)
-	for (let i = 0; i <= celllist.length; i++){
-		for (let j = 0; j <= totext.length; j++){
-			if (celllist[i] == totext[j]){
-				console.log("highligxht every move")
-		  }
-		}	
-	}
-}
+// function everymove () { // highlight every move
+// 	var celllist1 = document.getElementsByTagName('td');    // <------------------------------------------------
+// 	for (let i = 0; i <= celllist1.length; i++){
+// 		for (let k = 0; k <= totext.length; k++){
+//       if (celllist1[i] == totext[k]){
+//         console.log("highligxht");
+//       }
+//     }
+//   }
+// }
