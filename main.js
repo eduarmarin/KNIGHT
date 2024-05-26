@@ -1,11 +1,16 @@
-//const findMoves = require('./knight');
-//const findPath = require("./knight.js");
+var container = document.createElement('div');
+container.style.display = "flex";
+container.style.alignItems = "center";
+container.style.justifyContent = "center";
+container.style.flexDirection = "column";
 
 var center = document.createElement('div'); // Create a div to center all the elements
-center.style.display = "flex";
-center.style.alignItems = "center";
-center.style.justifyContent = "center";
-center.style.flexDirection = "column";
+
+var info = document.createElement('div');
+var infomoves = document.createElement('div'); // how many moves
+
+info.appendChild(infomoves);
+container.appendChild(center);
 
 // Create a table element  --> chessboard --------------------------------------------------------------------
 var ChessTable = document.createElement('table');
@@ -30,21 +35,32 @@ for (var i = 0; i < 8; i++) {
 var cellstore = [];
 var x = 0;
 function getindex (){
-    var celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
-    for (var i = 0 ; i < celllist.length; i++) {
+    let celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
+    for (let i = 0 ; i < celllist.length; i++) {
         celllist[i].addEventListener('click', function () { // listen click on chessboard
-            this.classList.add('blue');
             this.style.transform = "scale(1.08, 1.08)";
-            var indexcell=this.innerHTML; //this is string of 3 index
+            let indexcell=this.innerHTML; //this is string of 3 index
             if(x == 0){
+              cellstore.lenght = 0;
+                this.classList.add('blue');
                 cellstore[0] = indexcell[0]; //startX
                 cellstore[1] = indexcell[2]; //startX
-                x++;
+                infomoves.textContent = ("moves: ");
+                removered();
+                x = 1;
             }else{
+                this.classList.add('blue');
                 cellstore[2] = indexcell[0]; //endX
                 cellstore[3] = indexcell[2]; //endY
                 x = 0;
-                console.log("moves: " + findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]));
+                removeblue();
+
+                var infocontedor = findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]);
+                infomoves.textContent = ("moves: " + infocontedor);
+                center.appendChild(info);
+                console.log("moves: " + infocontedor);
+//                console.log("moves: " + findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]));
+                indexcell.length = 0;
                 findMoves(cellstore[2], cellstore[3]);
             }
             //console.log("cellstore " + cellstore);
@@ -55,7 +71,7 @@ function getindex (){
 center.appendChild(ChessTable); // Modifying table attribute properties------------------------------------------
 ChessTable.setAttribute('cellspacing', '0');
 ChessTable.setAttribute('width', 'auto');
-document.body.appendChild(center);
+document.body.appendChild(container);
 getindex();
 var xxx = getindex;
 //-------findpath and findMoves functions-------------------------------------------------------------------------
@@ -114,7 +130,7 @@ const findPath = (startX, startY, endX, endY) => {
 }
 
 //-------------------------------------------------------------------------------------------------------------
-var totext = [] // array to save every move to string
+var allmoves = [];           // matriz to save moves connect to the last one, it'll save pairs 
 const findMoves = (endX, endY) => { // this function will save and display every move from the first one to the last one
 	var lastmove = [];           // initialize a new matriz to help to compare every array inside boardMoves
 	for (let i = 0; i < 40; i++) { 
@@ -123,8 +139,8 @@ const findMoves = (endX, endY) => { // this function will save and display every
 			lastmove[i][j] = [];
 		}
 	}
-	var allmoves = [];           // matriz to save moves connect to the last one, it'll save pairs 
-	for (i = z; i >=0 ; i--){
+	for (let i = z; i >=0 ; i--){
+    console.log("z: " + z);
 		if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
 			lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
 			allmoves.push(boardMoves.slice(i, i + 1));
@@ -134,34 +150,45 @@ const findMoves = (endX, endY) => { // this function will save and display every
 			allmoves.push(boardMoves.slice(i, i + 1));
 		}
 	}
-	//const allmovesr = allmoves.slice(1, allmoves.length - 2).reverse();
 	var j = 1;
-	for (i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
-		var text1 = allmoves[i][0][0].toString(); // convert every move to string to allow comparing with
-		//totext.push(text1);                         // textcontent of every cell
-		console.log("move: " + j++);
-		console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
-		console.log(" totext: " + totext + " totextlenght: " + totext.length);
-
-    var celllist1 = document.getElementsByTagName('td');    // <------------------------------------------------
-    console.log("celllist1: " + (celllist1[6].innerHTML));
-    for (let k = 0; k < celllist1.length; k++){
-      if (celllist1[k].innerHTML == text1){
-        console.log("highligxht every move ");
-        celllist1[k].classList.add('red');
-      }else{console.log("nohighlight");}
-    }
+	for (let i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
+    var infopath = document.createElement('div'); // move by move
+    infopath.textContent = ("move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
+    info.appendChild(infopath);
+    //console.log("move: " + j++);
+		//console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
   }  
-	//everymove();
+  //cellstore.lenght = 0;
+	everymove();
 }
 
-// function everymove () { // highlight every move
-// 	var celllist1 = document.getElementsByTagName('td');    // <------------------------------------------------
-// 	for (let i = 0; i <= celllist1.length; i++){
-// 		for (let k = 0; k <= totext.length; k++){
-//       if (celllist1[i] == totext[k]){
-//         console.log("highligxht");
-//       }
-//     }
-//   }
-// }
+function everymove () { // highlight every move
+	let celllist = document.getElementsByTagName('td');    // <------------------------------------------------
+	for (let i = 0; i < celllist.length; i++){
+		for (k = allmoves.length - 2; k >= 0 ; k--){
+      if (celllist[i].textContent == allmoves[k][0][0] || celllist[i].textContent == allmoves[k][0][1]){
+        celllist[i].classList.add('red');
+      }
+    }
+  }
+  celllist.length = 0;  
+  //cellstore.length = 0; 
+  allmoves.length = 0;   
+  //z = 0;
+}
+
+function removered (){
+  let celllist = document.getElementsByTagName('td');    // <------------------------------------------------
+  	for (let i = 0; i < celllist.length; i++){
+      celllist[i].classList.remove("red");
+    }
+  // allmoves.length = 0;  
+  // celllist.length = 0;  
+}
+
+function removeblue (){
+  let celllist = document.getElementsByTagName('td');    // <------------------------------------------------
+  	for (let i = 0; i < celllist.length; i++){
+      celllist[i].classList.remove("blue");
+    }
+}
