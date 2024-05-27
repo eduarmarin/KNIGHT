@@ -4,6 +4,7 @@ const board = [];// create the board
 for (let i = 0; i < 8; i++) {
   board[i] = [];
 }
+console.log("board " + board);
 
 const boardMoves = [];// create another board with every internal move!
 for (let i = 0; i < 100; i++) { // iteration to initialize boradMoves matriz
@@ -88,4 +89,7 @@ var endX = 3;     // final point
 var endY = 3;
 
 console.log("moves: " + findPath(startX, startY, endX, endY));
-findMoves(endX, endY);                                                                                     
+findMoves(endX, endY);     
+console.log(board);         
+board.length = 0;                                                                       
+console.log(board);         
