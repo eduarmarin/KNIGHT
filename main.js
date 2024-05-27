@@ -8,7 +8,8 @@ container.style.flexDirection = "column";
 
 var center = document.createElement('div'); // Create a div to center all the elements
 
-var info = document.createElement('div'); //
+var info = document.createElement('div'); // contains infomoves and infopath
+info.classList.add('info');
 var infomoves = document.createElement('div'); // how many moves
 
 info.appendChild(infomoves);
@@ -43,31 +44,25 @@ function getindex (){
             this.style.transform = "scale(1.08, 1.08)";
             let indexcell=this.innerHTML; //this is string of 3 index
             if(click == 0){
-                //z = 0;
                 cellstore.lenght = 0;
                 this.classList.add('blue');
                 cellstore[0] = indexcell[0]; //startX
                 cellstore[1] = indexcell[2]; //startX
                 infomoves.textContent = ("moves: ");
                 removered();
+                removelist();
                 click = 1;
             }else{
                 this.classList.add('blue');
                 cellstore[2] = indexcell[0]; //endX
                 cellstore[3] = indexcell[2]; //endY
                 click = 0;
-                //z = 0; bug
                 removeblue();
-
                 var infocontedor = findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]);
                 infomoves.textContent = ("moves: " + infocontedor);
                 center.appendChild(info);
-                console.log("moves: " + infocontedor);
-                //console.log("moves: " + findPath(cellstore[0], cellstore[1], cellstore[2], cellstore[3]));
-                //indexcell.length = 0;
                 findMoves(cellstore[2], cellstore[3]);
             }
-            //console.log("cellstore " + cellstore);
         });
     }
 		//return celllist;
@@ -156,16 +151,13 @@ const findMoves = (endX, endY) => { // this function will save and display every
 			allmoves.push(boardMoves.slice(i, i + 1));
 		}
 	}
-  //z = 0; bug
 	var j = 1;
-	for (let i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move by console
-    var infopath = document.createElement('div'); // move by move
+	for (let i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move, move by move
+    var infopath = document.createElement('div'); 
+    infopath.classList.add('infopath');    
     infopath.textContent = ("move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
     info.appendChild(infopath);
-    //console.log("move: " + j++);
-		//console.log(allmoves[i][0][0] + " to " + allmoves[i][0][1]);
   }  
-  //cellstore.lenght = 0;
 	everymove();
 }
 
@@ -174,30 +166,28 @@ function everymove () { // highlight every move
 	for (let i = 0; i < celllist.length; i++){
 		for (k = allmoves.length - 2; k >= 0 ; k--){
       if (celllist[i].textContent == allmoves[k][0][0] || celllist[i].textContent == allmoves[k][0][1]){
-        celllist[i].classList.add('red');
+          celllist[i].classList.add('red'); //your code to be executed after 1 secon
       }
     }
   }
-  celllist.length = 0;  
-  //cellstore.length = 0; 
+  celllist.length = 0;  // restart variables !!!! <-------------------------------------------------
   allmoves.length = 0;   
   z = 0;
-//  board.length = 0;
   for (let i = 0; i < 8; i++) {
     board[i] = [];
   }
-  // for (let i = 0; i < 8; i++) {
-  //   console.log("board: " + " i: " + i +" content: " + board[i]);
-  // }
+}
+
+function removelist (){
+  const elements = document.getElementsByClassName("infopath")
+  while (elements.length > 0) elements[0].remove();
 }
 
 function removered (){
   let celllist = document.getElementsByTagName('td');    // <------------------------------------------------
   	for (let i = 0; i < celllist.length; i++){
       celllist[i].classList.remove("red");
-    }
-  // allmoves.length = 0;  
-  // celllist.length = 0;  
+    } 
 }
 
 function removeblue (){
