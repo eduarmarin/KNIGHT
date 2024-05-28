@@ -151,13 +151,22 @@ const findMoves = (endX, endY) => { // this function will save and display every
 			allmoves.push(boardMoves.slice(i, i + 1));
 		}
 	}
-	var j = 1;
+  let allmoves2 = [];
+  console.log("allmoves: " + allmoves);
+  if(allmoves[0][0][0] == ""){
+    allmoves2.push(allmoves.slice(1, allmoves.lenght));
+  }
+  console.log("allmoves2: " + allmoves2);
+  
+  var j = 1;
 	for (let i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move, move by move
     var infopath = document.createElement('div'); 
     infopath.classList.add('infopath');    
     infopath.textContent = ("move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
+    console.log("allmoveslenght: " + allmoves.length + " --> move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
     info.appendChild(infopath);
-  }  
+  }
+
 	everymove();
 }
 
@@ -167,6 +176,7 @@ function everymove () { // highlight every move
 		for (k = allmoves.length - 2; k >= 0 ; k--){
       if (celllist[i].textContent == allmoves[k][0][0] || celllist[i].textContent == allmoves[k][0][1]){
           celllist[i].classList.add('red'); //your code to be executed after 1 secon
+          //console.log("list: " + allmoves[k][0][0] + "   to   " + allmoves[k][0][1]);
       }
     }
   }
