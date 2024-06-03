@@ -1,4 +1,3 @@
-var z = 0;
 
 var container = document.createElement('div');
 container.style.display = "flex";
@@ -22,6 +21,9 @@ for (var i = 0; i < 8; i++) {
     for (var j = 0; j < 8; j++) {
         let td = document.createElement('td');// Create a cell
         td.textContent = [i, j]; //and fill every cell with tr and td   < ------------------------------------
+        td.style.fontSize = '14px';
+        td.style.color = 'gray';
+        //td.style.opacity = '0.7';
         if ((i + j) % 2 == 0) { // If the sum of cell coordinates is even then color the cell white
             td.classList.add('cell', 'whitecell');
             tr.appendChild(td);
@@ -30,18 +32,22 @@ for (var i = 0; i < 8; i++) {
             td.classList.add('cell', 'blackcell');
             tr.appendChild(td);
         }
+        if (window.matchMedia("(max-width: 400px)").matches) {
+           td.style.width = "30px";
+           td.style.height = "30px";
+           td.style.fontSize = '10px';
+         }
     }
     ChessTable.appendChild(tr);
 }
 
-// from here read clicks and save them ---> cellstore --------------------------------------------------------------
+// from here get clicks and save them ---> cellstore --------------------------------------------------------------
 var cellstore = [];
 var click = 0;
 function getindex (){
     let celllist = document.getElementsByClassName('cell');    // <------------------------------------------------
     for (let i = 0 ; i < celllist.length; i++) {
         celllist[i].addEventListener('click', function () { // listen click on chessboard
-            this.style.transform = "scale(1.08, 1.08)";
             let indexcell=this.innerHTML; //this is string of 3 index
             if(click == 0){
                 cellstore.lenght = 0;
@@ -88,14 +94,13 @@ for (let i = 0; i < 100; i++) { // iteration to initialize boradMoves matriz
   }
 }
 
+var z = 0;
 const addMove = (a, b, x, y, level) => {  //insert level; level says how many step take it 
-  //console.log("board: "); 
   if ((x >= 0) && (x <= 7) && (y >= 0) && (y <= 7) && board[x][y] == null) {
     board[x][y] = level;
     boardMoves[z][0] = [a, b]; // fill the boardMoves with inicial and final square move
     boardMoves[z][1] = [x, y]; // every iteration 
     z++;
-    //console.log("addmove z: " + z);
   }
 }
 
@@ -120,28 +125,25 @@ const addAllPossible = (level) => { // scan the board
 }
 
 const findPath = (startX, startY, endX, endY) => {
-  //console.log("findpath z: " + z);
   addMove(startX, startY, startX, startY, 0); // call the function to insert initial position
   let index = 0;
   do {
     addAllPossible(index++); // start with 0
   } while (board[endX][endY] == null);
-  //z = 0; bug
   return board[endX][endY];
 }
 
 //-------------------------------------------------------------------------------------------------------------
 var allmoves = [];           // matriz to save moves connect to the last one, it'll save pairs 
 const findMoves = (endX, endY) => { // this function will save and display every move from 
-	var lastmove = [];                // the first one to the last one
+  var lastmove = [];                // the first one to the last one
 	for (let i = 0; i < 40; i++) { // initialize a new matriz to help to compare every array inside boardMoves 
 		lastmove[i] = [];
 		for (let j = 0; j < 2; j++) {
 			lastmove[i][j] = [];
 		}
 	}
-	for (let i = z; i >=0 ; i--){
-    //console.log("z: " + z);
+	for (let i = z-1; i >=0 ; i--){
 		if (boardMoves[i][1][0] == endX && boardMoves[i][1][1] == endY){ // find and compare from the last move to the first one
 			lastmove = boardMoves.slice(i, i + 1);                         //then add it to another array
 			allmoves.push(boardMoves.slice(i, i + 1));
@@ -151,22 +153,15 @@ const findMoves = (endX, endY) => { // this function will save and display every
 			allmoves.push(boardMoves.slice(i, i + 1));
 		}
 	}
-  let allmoves2 = [];
-  console.log("allmoves: " + allmoves);
-  if(allmoves[0][0][0] == ""){
-    allmoves2.push(allmoves.slice(1, allmoves.lenght));
-  }
-  console.log("allmoves2: " + allmoves2);
   
   var j = 1;
-	for (let i = allmoves.length - 2; i > 0 ; i--){  // loop to display list move, move by move
+	for (let i = allmoves.length - 2; i >= 0 ; i--){  // loop to display list move, move by move
     var infopath = document.createElement('div'); 
     infopath.classList.add('infopath');    
     infopath.textContent = ("move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
-    console.log("allmoveslenght: " + allmoves.length + " --> move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
+    //console.log("allmoveslenght: " + allmoves.length + " --> move  " + j++ + " :     " + allmoves[i][0][0] + "   to   " + allmoves[i][0][1]);
     info.appendChild(infopath);
   }
-
 	everymove();
 }
 
@@ -176,7 +171,7 @@ function everymove () { // highlight every move
 		for (k = allmoves.length - 2; k >= 0 ; k--){
       if (celllist[i].textContent == allmoves[k][0][0] || celllist[i].textContent == allmoves[k][0][1]){
           celllist[i].classList.add('red'); //your code to be executed after 1 secon
-          //console.log("list: " + allmoves[k][0][0] + "   to   " + allmoves[k][0][1]);
+          celllist[i].style.color = "black";
       }
     }
   }
@@ -197,6 +192,7 @@ function removered (){
   let celllist = document.getElementsByTagName('td');    // <------------------------------------------------
   	for (let i = 0; i < celllist.length; i++){
       celllist[i].classList.remove("red");
+      celllist[i].style.color = "gray";
     } 
 }
 
