@@ -1,0 +1,31 @@
+body {
+    text-align: center;
+}
+
+.cell {
+    height: 50px;
+    width: 50px;
+    border: 1.5px solid grey;
+    border-style: inset;
+    cursor: pointer;
+}
+
+.blackcell {
+    background-color: black;
+}
+
+.whitecell {
+    background-color: white;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
